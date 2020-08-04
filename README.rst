@@ -7,6 +7,10 @@ Django Stisla is a Bootstrap 4 based admin template for Django admin interface d
 Installation
 ------------
 
+Install the package from PyPi::
+
+    pip install django-stisla
+         
 
 Quick start
 -----------
