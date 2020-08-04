@@ -2,7 +2,11 @@
 Django Stisla
 =============
 
-Django Stisla is a Bootstrap 4 based admin template for Django admin interface developed using the stisla free bootstrap admin template.
+Django Stisla is a Bootstrap 4 based admin template for Django admin interface developed using the `stisla <https://github.com/stisla/stisla>`_ free bootstrap admin template.
+
+Installation
+------------
+
 
 Quick start
 -----------
