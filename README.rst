@@ -19,7 +19,7 @@ Quick start
 
     INSTALLED_APPS = [
         ...
-        'django_stisla.apps.admin',
+        'django_stisla',
         'django.contrib.admin',
         'django.contrib.auth',
         ...
@@ -64,3 +64,32 @@ Quick start
     ...
 
 5. Start the development server and visit http://127.0.0.1:8000/admin/ to see your newly installed Django Stisla for admin.
+
+
+Admin Model Registration
+------------------------
+
+To register your models in Django admin, please import "from django_stisla.admin" in your applications admin.py and register your models as follows::
+
+    ...
+    from django_stisla.admin import site
+    ...
+    ...
+    site.register(Image)
+    site.register(Author)
+    site.register(Topic)
+    ...
+
+
+Theme Customizations
+--------------------
+
+To set logo/title in admin login page, please create templates/admin/login.html file in your application and use the following code::
+
+    {% extends "admin/login.html" %}
+
+    {% block login-brand %}
+    <div class="login-brand">
+        <h1>Django Administration</h1>
+    </div>
+    {% endblock %}

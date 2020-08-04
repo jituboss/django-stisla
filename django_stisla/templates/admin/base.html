@@ -1,4 +1,4 @@
-{% load i18n static %}<!DOCTYPE html>
+{% load i18n static stisla_tweaks %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -52,12 +52,12 @@
             <li class="dropdown">
               {% block welcome-msg %}
               <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{% static "admin/assets/img/avatar/avatar-1.png" %}" class="rounded-circle mr-1">              
+                <img alt="image" src="https://www.gravatar.com/avatar/{{ user.email|md5 }}" class="rounded-circle mr-1">              
                 <div class="d-sm-none d-lg-inline-block">Hi, {% firstof user.get_short_name user.get_username %}</div>
               </a>
               {% endblock %}
               <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in 5 min ago</div>
+                <div class="dropdown-title">Logged in {{ user.last_login|logged_in }} min ago</div>
                 {% if site_url %}
                 <a class="dropdown-item" href="{{ site_url }}">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -79,7 +79,7 @@
                   {% trans 'Change password' %}
                 </a>
                 {% endif %}
-                <a href="features-profile.html" class="dropdown-item has-icon">
+                <!-- <a href="features-profile.html" class="dropdown-item has-icon">
                   <i class="far fa-user"></i> Profile
                 </a>
                 <a href="features-activities.html" class="dropdown-item has-icon">
@@ -87,7 +87,7 @@
                 </a>
                 <a href="features-settings.html" class="dropdown-item has-icon">
                   <i class="fas fa-cog"></i> Settings
-                </a>
+                </a> -->
                 <div class="dropdown-divider"></div>
                 <a href="{% url 'admin:logout' %}" class="dropdown-item has-icon text-danger">
                   <i class="fas fa-sign-out-alt"></i> {% trans 'Log out' %}

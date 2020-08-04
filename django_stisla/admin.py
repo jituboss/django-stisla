@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib import admin
@@ -12,6 +13,7 @@ class StislaAdmin(AdminSite):
     def each_context(self, request):
         context = super().each_context(request)
         context["site_short_title"] = self.site_short_title
+        context["current_time"] = datetime.datetime.utcnow()
         return context
 
 
