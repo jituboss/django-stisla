@@ -1,0 +1,11 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'admin:index' %}">
+    <div class="sidebar-brand-text mx-3">{{ site_header|default:_('Django administration') }}</div>
+</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

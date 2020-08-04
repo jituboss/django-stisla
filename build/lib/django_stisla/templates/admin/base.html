@@ -1,0 +1,197 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
+  
+  {% block extrastyle %}{% endblock %}
+  {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}">{% endif %}
+  {% block extrahead %}{% endblock %}
+  {% block responsive %}
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">  
+
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}">
+    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}">{% endif %}
+  {% endblock %}
+  {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static "admin/assets/css/style.css" %}">
+  <link rel="stylesheet" href="{% static "admin/assets/css/components.css" %}">
+  <link rel="stylesheet" href="{% static "admin/assets/css/custom.css" %}">
+
+</head>
+
+{% load i18n %}
+
+<body id="page-top" class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+  data-admin-utc-offset="{% now "Z" %}">
+
+  <div id="app">
+    <div class="main-wrapper">
+      {% if user.is_active %}
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>
+          
+        </form>
+        <ul class="navbar-nav navbar-right">
+          {% block usertools %}   
+            {% if has_permission %}                                   
+            <li class="dropdown">
+              {% block welcome-msg %}
+              <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="{% static "admin/assets/img/avatar/avatar-1.png" %}" class="rounded-circle mr-1">              
+                <div class="d-sm-none d-lg-inline-block">Hi, {% firstof user.get_short_name user.get_username %}</div>
+              </a>
+              {% endblock %}
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-title">Logged in 5 min ago</div>
+                {% if site_url %}
+                <a class="dropdown-item" href="{{ site_url }}">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  {% trans 'View site' %}
+                </a>
+                {% endif %}
+                {% if user.is_active and user.is_staff %}
+                  {% url 'django-admindocs-docroot' as docsroot %}
+                  {% if docsroot %}
+                  <a class="dropdown-item" href="{{ docsroot }}">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    {% trans 'Documentation' %}
+                  </a>
+                  {% endif %}
+                {% endif %}
+                {% if user.has_usable_password %}
+                <a class="dropdown-item" href="{% url 'admin:password_change' %}">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  {% trans 'Change password' %}
+                </a>
+                {% endif %}
+                <a href="features-profile.html" class="dropdown-item has-icon">
+                  <i class="far fa-user"></i> Profile
+                </a>
+                <a href="features-activities.html" class="dropdown-item has-icon">
+                  <i class="fas fa-bolt"></i> Activities
+                </a>
+                <a href="features-settings.html" class="dropdown-item has-icon">
+                  <i class="fas fa-cog"></i> Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'admin:logout' %}" class="dropdown-item has-icon text-danger">
+                  <i class="fas fa-sign-out-alt"></i> {% trans 'Log out' %}
+                </a>
+              </div>
+            </li>
+            {% endif %}
+          {% endblock %}
+        </ul>
+      </nav>
+      <div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <!-- <a href="index.html">Stisla</a> -->
+            {% block branding %}{% endblock %}
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a href="index.html">{{ site_short_title }}</a>
+          </div>
+          <ul class="sidebar-menu">
+            {% if available_apps %}
+              <li class="menu-header" >Administration</li>              
+              {% for app in available_apps %}              
+              <li class="nav-item dropdown {%if opts.app_label == app.app_label %}active{%endif%}">
+                <a title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}" href="{{ app.app_url }}" class="nav-link has-dropdown app-{{ app.app_label }}"><i class="fas fa-{{ app.app_label }}"></i><span>{{ app.name }}</span></a>
+                <ul class="dropdown-menu">
+                  {% for model in app.models %}
+                  <li {%if opts.verbose_name_plural|lower == model.name|lower %}class="active"{%endif%}><a class="nav-link" href="{{ model.admin_url }}">{{ model.name }}</a></li>
+                  {% endfor %}                      
+                </ul>
+              </li>
+              {% endfor %}                                
+            {% endif %}        
+          </ul>            
+        </aside>
+      </div>
+      {% endif %}
+
+      <!-- Main Content -->
+      <div class="{% block main-content-class %}main-content{% endblock %}">
+        <section class="section">
+          {% if user.is_active %}
+          <div class="section-header">
+            {% block content_title %}{% if title %}<h1 class="h3 mb-0 text-gray-800">{{ title }}</h1>{% endif %}{% endblock %}
+            <div class="section-header-breadcrumb">
+                {% block breadcrumbs %}
+                <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+                {% if title %} &rsaquo; {{ title }}{% endif %}                
+                {% endblock %}              
+            </div>
+          </div>
+            {% if not is_popup %}
+            <!-- Header -->
+            <div>                    
+                {% block nav-global %}{% endblock %}
+            </div>
+            <!-- END Header -->
+            {% endif %}
+          {% endif %}
+          <div class="section-body">
+            {% block messages %}
+                {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message|capfirst }}</div>
+                  {% endfor %}</ul>
+                {% endif %}
+            {% endblock messages %}
+            
+            
+            {% block pretitle %}{% endblock %}
+                  
+            {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+              
+          </div>
+        </section>
+      </div>
+      {% if user.is_active %}
+      <footer class="main-footer">
+        <div class="footer-left">
+          {% block footer %}<div id="footer"></div>{% endblock %}          
+        </div>
+        <div class="footer-right">
+          1.0.0
+        </div>
+      </footer>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
+  
+  <!-- Template JS File -->
+  <script src="{% static "admin/assets/js/scripts.js" %}"></script>
+  <script src="{% static "admin/assets/js/custom.js" %}"></script>
+  
+</body>
+</html>

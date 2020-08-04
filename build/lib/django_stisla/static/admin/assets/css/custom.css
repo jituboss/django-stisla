@@ -1,0 +1,66 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+/*# sourceMappingURL=custom.css.map */
+
+nav ul li{
+    list-style-type: none;
+}
+
+.section-body a {
+    color: #6777ef;
+}
+
+.section-body .submit-row a.deletelink{
+    height: auto;
+}
+
+#content-main {
+    padding: 20px;
+    background: #fff;
+}
+
+.section-body a.btn{
+    color: #fff;
+}
+
+.section-header .breadcrumbs {    
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: .75rem 1rem;
+    list-style: none;    
+    border-radius: .25rem;
+    background-color: #999 !important;
+    color: #333;
+}
+
+.breadcrumbs a {
+    margin: 0 5px;
+}
+
+
+.calendarbox, .clockbox {
+    z-index: 9999;
+}
+
+.sidebar-brand-text {    
+    max-width: 200px;
+    line-height: 20px;    
+}
+
+
+/* Menu Icons */
+
+.fa-auth:before {
+    content: "\f023";
+}
+
+.fa-cms:before {
+    content: "\f0ea";
+}
