@@ -54,13 +54,14 @@ nav ul li{
     line-height: 20px;    
 }
 
-
-/* Menu Icons */
-
-.fa-auth:before {
-    content: "\f023";
+ul.errorlist {
+    width: 100%;
 }
 
-.fa-cms:before {
-    content: "\f0ea";
+.djn-group .djn-group-nested {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 40px;
 }
+
+

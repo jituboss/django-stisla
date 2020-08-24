@@ -6,3 +6,8 @@
 /docs/_build/
 /node_modules/
 /build/
+venv/
+*__pycache__
+.cache/
+.vscode/
+.idea/

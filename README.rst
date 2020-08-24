@@ -93,3 +93,24 @@ To set logo/title in admin login page, please create templates/admin/login.html 
         <h1>Django Administration</h1>
     </div>
     {% endblock %}
+
+
+To add extra CSS to dashboard theme, create static/admin/assets/css/extra.css file in your app. For example you can customize Font-awesome icons in the sidebar menu as follows based on your loaded apps in django::
+
+    /* Custom font awesome icon for django auth app */
+
+    .fa-auth:before { 
+        content: "\f023";
+    }
+
+    /* Custom font awesome icon for an app name cms */
+
+    .fa-cms:before {
+        content: "\f0ad";
+    }
+
+    /* Custom font awesome icon for an app name order */
+
+    .fa-order:before {
+        content: "\f07b";
+    }

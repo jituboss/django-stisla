@@ -1,0 +1,17 @@
+/* Menu Icons */
+
+.fa-auth:before {
+    content: "\f023";
+}
+
+.fa-setup:before {
+    content: "\f0ad";
+}
+
+.fa-menu::before {
+    content: "\f15c";
+}
+
+.fa-order:before {
+    content: "\f07b";
+}
