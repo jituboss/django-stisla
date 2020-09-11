@@ -5,9 +5,10 @@
  * 
  */
 
+
 /*# sourceMappingURL=custom.css.map */
 
-nav ul li{
+nav ul li {
     list-style-type: none;
 }
 
@@ -15,7 +16,7 @@ nav ul li{
     color: #6777ef;
 }
 
-.section-body .submit-row a.deletelink{
+.section-body .submit-row a.deletelink {
     height: auto;
 }
 
@@ -24,17 +25,17 @@ nav ul li{
     background: #fff;
 }
 
-.section-body a.btn{
+.section-body a.btn {
     color: #fff;
 }
 
-.section-header .breadcrumbs {    
+.section-header .breadcrumbs {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: .75rem 1rem;
-    list-style: none;    
+    list-style: none;
     border-radius: .25rem;
     background-color: #999 !important;
     color: #333;
@@ -44,14 +45,14 @@ nav ul li{
     margin: 0 5px;
 }
 
-
-.calendarbox, .clockbox {
+.calendarbox,
+.clockbox {
     z-index: 9999;
 }
 
-.sidebar-brand-text {    
+.sidebar-brand-text {
     max-width: 200px;
-    line-height: 20px;    
+    line-height: 20px;
 }
 
 ul.errorlist {
@@ -64,4 +65,6 @@ ul.errorlist {
     margin-left: 40px;
 }
 
-
+#changelist #toolbar form #searchbar {
+    height: 30px !important;
+}
