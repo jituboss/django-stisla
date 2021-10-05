@@ -15,7 +15,7 @@ Install the package from PyPi::
 Quick start
 -----------
 
-1. Add "django_stisla.apps.admin" with "django.contrib.admin" & "django.contrib.auth" to your INSTALLED_APPS setting like this::
+1. Add "django_stisla.apps.admin" and "widget_tweaks" with "django.contrib.admin" & "django.contrib.auth" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...
@@ -23,6 +23,7 @@ Quick start
         'django.contrib.admin',
         'django.contrib.auth',
         ...
+        'widget_tweaks'
     ]
 
 2. Make sure django.template.context_processors.request is enabled in project settings.py::

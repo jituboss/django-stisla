@@ -1955,7 +1955,7 @@ body, html {
   min-height: 100%; }
 
 body {
-  background-color: #f4f6f9;
+  background-color: var(--stisla-body-bg);
   font-size: 14px;
   font-weight: 400;
   font-family: "Nunito", "Segoe UI", arial;
@@ -2354,7 +2354,7 @@ pre {
   .section .section-header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-    background-color: #fff;
+    background-color: var(--stisla-header-bg);
     border-radius: 3px;
     border: none;
     position: relative;
@@ -2820,7 +2820,7 @@ body.layout-3 .main-footer {
       .main-sidebar .sidebar-menu li.active a.has-dropdown:after {
         transform: translate(0, -50%) rotate(90deg); }
     .main-sidebar .sidebar-menu li.active ul.dropdown-menu {
-      background-color: #f8fafb; }
+      background-color: var(--stisla-nav-border); }
     .main-sidebar .sidebar-menu li a.has-dropdown:after {
       content: "";
       font-family: 'Font Awesome 5 Free';
@@ -2870,7 +2870,7 @@ body.layout-3 .main-footer {
   padding: 20px 30px 20px 280px;
   margin-top: 40px;
   color: #98a6ad;
-  border-top: 1px solid #e3eaef;
+  border-top: 1px solid var(--stisla-border);
   display: inline-block;
   width: 100%; }
   .main-footer .footer-left {
